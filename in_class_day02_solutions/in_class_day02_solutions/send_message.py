@@ -1,4 +1,5 @@
 """ This script explores publishing ROS messages in ROS using Python """
+import numpy as np
 import rclpy
 from rclpy.node import Node
 from geometry_msgs.msg import PointStamped, Point
@@ -14,7 +15,7 @@ class SendMessageNode(Node):
 
     def run_loop(self):
         my_header = Header(stamp=self.get_clock().now().to_msg(), frame_id="odom")
-        my_point = Point(x=1.0, y=2.0, z=0.0)
+        my_point = Point(x=2*np.random.rand(), y=2*np.random.rand(), z=0.0)
         my_point_stamped = PointStamped(header=my_header, point=my_point)
         self.publisher.publish(my_point_stamped)
         print(my_point_stamped)
